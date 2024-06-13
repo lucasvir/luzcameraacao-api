@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +47,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long userId, String location, int complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt, BigDecimal totalValue, List<Product> products) {
+    public Order(Long userId, String location, int complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt, BigDecimal totalValue) {
         this.userId = userId;
         this.location = location;
         this.complement = complement;
@@ -54,7 +55,7 @@ public class Order {
         this.startedAt = startedAt;
         this.expiresAt = expiresAt;
         this.totalValue = totalValue;
-        this.products = products;
+        this.products = new ArrayList<>();
         this.isFinished = false;
     }
 

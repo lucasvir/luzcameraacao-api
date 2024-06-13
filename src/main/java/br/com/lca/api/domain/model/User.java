@@ -1,7 +1,11 @@
 package br.com.lca.api.domain.model;
 
+import br.com.lca.api.domain.model.dto.UserCreateDTO;
+import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,7 +44,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, String telephone, String cpf, String cnpj, List<Order> orders) {
+    public User(String firstName, String lastName, String email, String password, String telephone, String cpf, String cnpj) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -48,7 +52,16 @@ public class User implements Serializable {
         this.telephone = telephone;
         this.cpf = cpf;
         this.cnpj = cnpj;
-        this.orders = orders;
+        this.orders = new ArrayList<>();
+    }
+
+    public User(UserCreateDTO createDTO) {
+        this.firstName = createDTO.firstName();
+        this.lastName = createDTO.lastName();
+        this.email = createDTO.email();
+        this.password = createDTO.password();
+        this.telephone = createDTO.telephone();
+        this.orders = new ArrayList<>();
     }
 
     public Long getId() {
@@ -113,5 +126,25 @@ public class User implements Serializable {
                 ", cnpj='" + cnpj + '\'' +
                 ", orders=" + orders +
                 '}';
+    }
+
+    public void updateData(UserUpdateDTO updateDTO) {
+        boolean emptyDTO =
+                updateDTO.firstName() == null
+                        && updateDTO.lastName() == null
+                        && updateDTO.email() == null
+                        && updateDTO.password() == null
+                        && updateDTO.cpf() == null
+                        && updateDTO.cnpj() == null;
+
+        if (emptyDTO) throw new IllegalArgumentException("Empty argument to update.");
+
+        this.firstName = updateDTO.firstName() != null ? updateDTO.firstName() : getFirstName();
+        this.lastName = updateDTO.lastName() != null ? updateDTO.lastName() : getLastName();
+        this.email = updateDTO.email() != null ? updateDTO.email() : getEmail();
+        this.password = updateDTO.password() != null ? updateDTO.password() : getPassword();
+        this.telephone = updateDTO.telephone() != null ? updateDTO.telephone() : getTelephone();
+        this.cpf = updateDTO.cpf() != null ? updateDTO.cpf() : getCpf();
+        this.cnpj = updateDTO.cnpj() != null ? updateDTO.cnpj() : getCnpj();
     }
 }
