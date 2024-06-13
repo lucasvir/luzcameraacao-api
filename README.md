@@ -5,9 +5,8 @@
 ```mermaid
 classDiagram
     class User {
-        -id: int
-        -firstName: string
-        -lastName: string
+        User : String firstName
+        +String lastName
         -email: string
         -password: string
         -telephone: string
@@ -17,7 +16,6 @@ classDiagram
     }
     
     class Order {
-        -id: int
         -userId: int
         -location: string
         -complement: int
@@ -29,7 +27,6 @@ classDiagram
     }
     
     class Product {
-        -id: int
         -orderId: int
         -name: string
         -brand: string
