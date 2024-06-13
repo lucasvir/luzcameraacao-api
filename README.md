@@ -5,37 +5,37 @@
 ```mermaid
 classDiagram
     class User {
-        (D, #00F) id: int
-        (D, #00F) firstName: string
-        (D, #00F) lastName: string
-        (D, #00F) email: string
-        (D, #00F) password: string
-        (D, #00F) telephone: string
-        (D, #00F) cpf: string
-        (D, #00F) cnpj: string
+        id: int
+        firstName: string
+        lastName: string
+        email: string
+        password: string
+        telephone: string
+        cpf: string
+        cnpj: string
         List<Order> orders
     }
     
     class Order {
-        (D, #00F) id: int
-        (D, #00F) userId: int
-        (D, #00F) location: string
-        (D, #00F) complement: int
-        (D, #00F) uf: string
-        (D, #00F) startedAt: datetime
-        (D, #00F) expiresAt: datetime
-        (D, #00F) List<Product> products
-        (D, #00F) totalValue: double
+        id: int
+        userId: int
+        location: string
+        complement: int
+        uf: string
+        startedAt: datetime
+        expiresAt: datetime
+        List<Product> products
+        totalValue: double
     }
     
     class Product {
-        (D, #00F) id: int
-        (D, #00F) orderId: int
-        (D, #00F) name: string
-        (D, #00F) brand: string
-        (D, #00F) category: string
-        (D, #00F) type: string
-        (D, #00F) price: double
+        id: int
+        orderId: int
+        name: string
+        brand: string
+        category: string
+        type: string
+        price: double
     }
     
     User "1" *-- "1..*" Order : has
