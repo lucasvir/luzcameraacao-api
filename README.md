@@ -5,34 +5,34 @@
 ```mermaid
 classDiagram
     class User {
-        User : String firstName
-        +String lastName
-        -email: string
-        -password: string
-        -telephone: string
-        -cpf: string
-        -cnpj: string
-        -List<Order> orders
+        -String firstName
+        -String lastName
+        -String email
+        -String password
+        -String telephone
+        -String cpf
+        -String cnpj
+        -List~Order~ orders
     }
     
     class Order {
-        -userId: int
-        -location: string
-        -complement: int
-        -uf: string
-        -startedAt: datetime
-        -expiresAt: datetime
-        -List<Product> products
-        -totalValue: double
+        -int userId
+        -String location
+        -int complement
+        -String uf
+        -datetime startedAt
+        -datetime expiresAt
+        -List~Product~ products
+        -BigDecimal totalValue
     }
     
     class Product {
-        -orderId: int
-        -name: string
-        -brand: string
-        -category: string
-        -type: string
-        -price: double
+        -int oderId
+        -String name
+        -String brand        
+        -String category
+        -String type
+        -BigDecimal price    
     }
     
     User "1" *-- "1..*" Order : has
