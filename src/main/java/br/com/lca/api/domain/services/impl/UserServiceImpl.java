@@ -1,5 +1,6 @@
 package br.com.lca.api.domain.services.impl;
 
+import br.com.lca.api.controllers.exceptions.EmptyResourceException;
 import br.com.lca.api.domain.model.User;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new NoSuchElementException(id.toString()));
 
         return new UserDTO(user);
     }
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
-        if(users.isEmpty()) throw new NoSuchElementException("Empty resource.");
+        if(users.isEmpty()) throw new EmptyResourceException();
 
         return users.stream().map(UserDTO::new).toList();
     }

@@ -1,5 +1,6 @@
 package br.com.lca.api.domain.model;
 
+import br.com.lca.api.controllers.exceptions.EmptyDataTransferObject;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import jakarta.persistence.*;
@@ -137,7 +138,7 @@ public class User implements Serializable {
                         && updateDTO.cpf() == null
                         && updateDTO.cnpj() == null;
 
-        if (emptyDTO) throw new IllegalArgumentException("Empty argument to update.");
+        if (emptyDTO) throw new EmptyDataTransferObject();
 
         this.firstName = updateDTO.firstName() != null ? updateDTO.firstName() : getFirstName();
         this.lastName = updateDTO.lastName() != null ? updateDTO.lastName() : getLastName();
