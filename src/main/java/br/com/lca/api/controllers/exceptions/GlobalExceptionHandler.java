@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(PropertyValueException.class)
     public ResponseEntity<ApiErrorResponseDTO> handle400PropertyValueException(PropertyValueException ex) {
-        ErrorDto error = new ErrorDto("Illegal null property. Property: " + ex.getPropertyName(), HttpStatus.BAD_REQUEST);
+        ErrorDto error = new ErrorDto("Illegal property value. Property: " + ex.getPropertyName(), HttpStatus.BAD_REQUEST);
         ApiError apiError = new ApiError(error);
 
         return apiError.createResponse();
