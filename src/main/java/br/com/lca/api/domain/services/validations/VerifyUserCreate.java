@@ -1,8 +1,9 @@
 package br.com.lca.api.domain.services.validations;
 
-import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Component;
+
+import br.com.lca.api.domain.model.dto.UserCreateDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,10 +33,10 @@ public class VerifyUserCreate implements VerifyDTO<UserCreateDTO> {
         );
 
         for (ValidateProperty<UserCreateDTO> properties : results) {
-            if(properties.value() == null)
+            if (properties.value() == null)
                 throw new PropertyValueException(
                         "Illegal empty property value. Property: ",
-                        "UserCreateDTO",
+                        properties.tClass().getName(),
                         properties.name()
                 );
 

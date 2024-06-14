@@ -6,7 +6,7 @@ import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
 import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import br.com.lca.api.domain.repositories.UserRepository;
-import br.com.lca.api.domain.services.UserService;
+import br.com.lca.api.domain.services.ServiceStrategy;
 import br.com.lca.api.domain.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, UserUpdateDTO> {
 
     @Autowired
     private UserRepository userRepository;

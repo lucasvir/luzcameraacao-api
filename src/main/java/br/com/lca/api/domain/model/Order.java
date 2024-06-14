@@ -1,5 +1,7 @@
 package br.com.lca.api.domain.model;
 
+import br.com.lca.api.controllers.exceptions.EmptyDataTransferObject;
+import br.com.lca.api.domain.model.dto.OrderUpdateDTO;
 import br.com.lca.api.domain.model.enums.UnidadeFederativa;
 import jakarta.persistence.*;
 
@@ -24,7 +26,7 @@ public class Order {
     private String location;
 
     @Column(nullable = false)
-    private int complement;
+    private String complement;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -47,7 +49,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long userId, String location, int complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt, BigDecimal totalValue) {
+    public Order(Long userId, String location, String complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt, BigDecimal totalValue) {
         this.userId = userId;
         this.location = location;
         this.complement = complement;
@@ -71,7 +73,7 @@ public class Order {
         return location;
     }
 
-    public int getComplement() {
+    public String getComplement() {
         return complement;
     }
 
@@ -126,5 +128,35 @@ public class Order {
                 ", isFinished=" + isFinished +
                 ", products=" + products +
                 '}';
+    }
+
+    public void updateData(OrderUpdateDTO updateDTO) {
+        boolean emptyDTO =
+                updateDTO.userId() == null
+                        && updateDTO.location() == null
+                        && updateDTO.complement() == null
+                        && updateDTO.uf() == null
+                        && updateDTO.startedAt() == null
+                        && updateDTO.expiresAt() == null
+                        && updateDTO.totalValue() == null;
+
+        if (emptyDTO) throw new EmptyDataTransferObject();
+
+        boolean userIdIsPresent = updateDTO.userId() != null && updateDTO.userId() > 0;
+        boolean locationIsPresent = updateDTO.location() != null && !updateDTO.location().isBlank();
+        boolean complementIsPresent = updateDTO.complement() != null && !updateDTO.complement().isBlank();
+        boolean ufIsPresent = updateDTO.uf() != null && !updateDTO.uf().isBlank();
+        boolean startedAtIsPresent = updateDTO.startedAt() != null && !updateDTO.startedAt().toString().isBlank();
+        boolean expiresAtIsPresent = updateDTO.expiresAt() != null && !updateDTO.expiresAt().toString().isBlank();
+        boolean totalIsPresent = updateDTO.totalValue() != null && updateDTO.totalValue().doubleValue() > 0;
+
+
+        if (userIdIsPresent) this.userId = updateDTO.userId();
+        if (locationIsPresent) this.location = updateDTO.location();
+        if (complementIsPresent) this.complement = updateDTO.complement();
+        if (ufIsPresent) this.uf = UnidadeFederativa.fromSigla(updateDTO.uf());
+        if (startedAtIsPresent) this.startedAt = updateDTO.startedAt();
+        if (expiresAtIsPresent) this.expiresAt = updateDTO.expiresAt();
+        if (totalIsPresent) this.totalValue = updateDTO.totalValue();
     }
 }

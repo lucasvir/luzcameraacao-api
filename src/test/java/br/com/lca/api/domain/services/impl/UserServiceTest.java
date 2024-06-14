@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceImplTest {
+class UserServiceTest {
 
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;

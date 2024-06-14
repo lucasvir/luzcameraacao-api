@@ -140,12 +140,12 @@ public class User implements Serializable {
 
         if (emptyDTO) throw new EmptyDataTransferObject();
 
-        this.firstName = updateDTO.firstName() != null ? updateDTO.firstName() : getFirstName();
-        this.lastName = updateDTO.lastName() != null ? updateDTO.lastName() : getLastName();
-        this.email = updateDTO.email() != null ? updateDTO.email() : getEmail();
-        this.password = updateDTO.password() != null ? updateDTO.password() : getPassword();
-        this.telephone = updateDTO.telephone() != null ? updateDTO.telephone() : getTelephone();
-        this.cpf = updateDTO.cpf() != null ? updateDTO.cpf() : getCpf();
-        this.cnpj = updateDTO.cnpj() != null ? updateDTO.cnpj() : getCnpj();
+        this.firstName = updateDTO.firstName() != null && !updateDTO.firstName().isBlank() ? updateDTO.firstName() : getFirstName();
+        this.lastName = updateDTO.lastName() != null && !updateDTO.lastName().isBlank() ? updateDTO.lastName() : getLastName();
+        this.email = updateDTO.email() != null && !updateDTO.email().isBlank()? updateDTO.email() : getEmail();
+        this.password = updateDTO.password() != null && !updateDTO.password().isBlank() ? updateDTO.password() : getPassword();
+        this.telephone = updateDTO.telephone() != null && !updateDTO.telephone().isBlank() ? updateDTO.telephone() : getTelephone();
+        this.cpf = updateDTO.cpf() != null && !updateDTO.cpf().isBlank() ? updateDTO.cpf() : getCpf();
+        this.cnpj = updateDTO.cnpj() != null && !updateDTO.cnpj().isBlank() ? updateDTO.cnpj() : getCnpj();
     }
 }
