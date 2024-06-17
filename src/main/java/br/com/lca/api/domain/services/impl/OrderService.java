@@ -2,16 +2,19 @@ package br.com.lca.api.domain.services.impl;
 
 import br.com.lca.api.controllers.exceptions.EmptyResourceException;
 import br.com.lca.api.domain.model.Order;
+import br.com.lca.api.domain.model.Product;
 import br.com.lca.api.domain.model.dto.OrderCreateDTO;
 import br.com.lca.api.domain.model.dto.OrderDTO;
 import br.com.lca.api.domain.model.dto.OrderUpdateDTO;
 import br.com.lca.api.domain.model.enums.UnidadeFederativa;
 import br.com.lca.api.domain.repositories.OrderRepository;
+import br.com.lca.api.domain.repositories.ProductRepository;
 import br.com.lca.api.domain.services.ServiceStrategy;
 import br.com.lca.api.domain.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -22,7 +25,10 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
     private OrderRepository orderRepository;
 
     @Autowired
-    private VerifyDTO<OrderCreateDTO> verifyCreateDTO;
+    private ProductRepository productRepository;
+
+    @Autowired
+    private VerifyDTO<OrderCreateDTO> verifyDTO;
 
     @Override
     public OrderDTO findById(Long id) {
@@ -34,7 +40,7 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
 
     @Override
     public OrderDTO create(OrderCreateDTO createDTO) {
-        verifyCreateDTO.verify(createDTO);
+        verifyDTO.verify(createDTO);
 
         Order order = new Order(
                 createDTO.userId(),
@@ -42,9 +48,10 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
                 createDTO.complement(),
                 UnidadeFederativa.fromSigla(createDTO.uf()),
                 createDTO.startedAt(),
-                createDTO.expiresAt(),
-                createDTO.totalValue()
+                createDTO.expiresAt()
         );
+
+        appendProducts(order, createDTO.productsId());
 
         Order orderEntity = orderRepository.save(order);
         return new OrderDTO(orderEntity);
@@ -75,5 +82,15 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
                 .orElseThrow(() -> new NoSuchElementException(id.toString()));
 
         orderRepository.delete(order);
+    }
+
+    void appendProducts(Order order, List<Long> productsId) {
+        productsId.forEach(p -> {
+            Product product = productRepository.findById(p)
+                    .orElseThrow(() -> new NoSuchElementException(p.toString()));
+
+            order.setProducts(product);
+            order.setTotalValue(order.getTotalValue().add(product.getPrice()));
+        });
     }
 }

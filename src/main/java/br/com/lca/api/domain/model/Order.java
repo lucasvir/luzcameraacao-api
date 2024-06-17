@@ -49,14 +49,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long userId, String location, String complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt, BigDecimal totalValue) {
+    public Order(Long userId, String location, String complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt) {
         this.userId = userId;
         this.location = location;
         this.complement = complement;
         this.uf = uf;
         this.startedAt = startedAt;
         this.expiresAt = expiresAt;
-        this.totalValue = totalValue;
+        this.totalValue = BigDecimal.valueOf(0.0);
         this.products = new ArrayList<>();
         this.isFinished = false;
     }
@@ -93,8 +93,17 @@ public class Order {
         return totalValue;
     }
 
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
+    }
+
     public List<Product> getProducts() {
         return products;
+    }
+
+    public void setProducts(Product product) {
+        this.products.add(product);
+        product.setAvailable(false);
     }
 
     public boolean isFinished() {

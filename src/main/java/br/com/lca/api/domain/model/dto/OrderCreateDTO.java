@@ -2,6 +2,7 @@ package br.com.lca.api.domain.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record OrderCreateDTO(
         Long userId,
@@ -10,6 +11,7 @@ public record OrderCreateDTO(
         String uf,
         LocalDateTime startedAt,
         LocalDateTime expiresAt,
-        BigDecimal totalValue
+        BigDecimal totalValue,
+        List<Long> productsId
 ) {
 }

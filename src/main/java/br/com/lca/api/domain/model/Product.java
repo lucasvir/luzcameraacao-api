@@ -1,5 +1,7 @@
 package br.com.lca.api.domain.model;
 
+import br.com.lca.api.controllers.exceptions.EmptyDataTransferObject;
+import br.com.lca.api.domain.model.dto.ProductUpdateDTO;
 import br.com.lca.api.domain.model.enums.Category;
 import br.com.lca.api.domain.model.enums.Type;
 import jakarta.persistence.*;
@@ -16,8 +18,6 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long orderId;
-
     @Column(nullable = false)
     private String name;
 
@@ -25,37 +25,35 @@ public class Product implements Serializable {
     private String brand;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @Column(nullable = false)
     private BigDecimal price;
 
     @Column(nullable = false)
-    private boolean isAvaiable;
+    private boolean isAvailable;
 
     public Product() {
     }
 
-    public Product(Long orderId, String name, String brand, Category category, Type type, BigDecimal price) {
-        this.orderId = orderId;
+    public Product(String name, String brand, Category category, Type type, BigDecimal price) {
         this.name = name;
         this.brand = brand;
         this.category = category;
         this.type = type;
         this.price = price;
-        this.isAvaiable = false;
+        this.isAvailable = true;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getOrderId() {
-        return orderId;
-    }
 
     public String getName() {
         return name;
@@ -77,8 +75,12 @@ public class Product implements Serializable {
         return price;
     }
 
-    public boolean isAvaiable() {
-        return isAvaiable;
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     @Override
@@ -98,13 +100,36 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", orderId=" + orderId +
                 ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category=" + category +
                 ", type=" + type +
                 ", price=" + price +
                 '}';
+    }
+
+    public void updateData(ProductUpdateDTO updateDTO) {
+        boolean emptyDTO =
+                updateDTO.orderId() == null
+                        && updateDTO.name() == null
+                        && updateDTO.brand() == null
+                        && updateDTO.category() == null
+                        && updateDTO.type() == null
+                        && updateDTO.price() == null;
+
+        if (emptyDTO) throw new EmptyDataTransferObject();
+
+        boolean nameIsPresent = updateDTO.name() != null && !updateDTO.name().isBlank();
+        boolean brandIsPresent = updateDTO.brand() != null && !updateDTO.brand().isBlank();
+        boolean categoryIsPresent = updateDTO.category() != null && !updateDTO.category().isBlank();
+        boolean typeIsPresent = updateDTO.type() != null && !updateDTO.type().isBlank();
+        boolean priceIsPresent = updateDTO.price() != null && updateDTO.price().doubleValue() > 0.0;
+
+        if (nameIsPresent) this.name = updateDTO.name();
+        if (brandIsPresent) this.brand = updateDTO.brand();
+        if (categoryIsPresent) this.category = Category.fromCode(updateDTO.category());
+        if (typeIsPresent) this.type = Type.fromCode(updateDTO.type());
+        if (priceIsPresent) this.price = updateDTO.price();
     }
 }
 

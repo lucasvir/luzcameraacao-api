@@ -22,8 +22,7 @@ public class VerifyOrderCreate implements VerifyDTO<OrderCreateDTO> {
         var uf = new ValidateProperty<>(OrderCreateDTO.class, "uf", createDTO.uf());
         var startedAt = new ValidateProperty<>(OrderCreateDTO.class, "startedAt", createDTO.startedAt().toString());
         var expiresAt = new ValidateProperty<>(OrderCreateDTO.class, "expiresAt", createDTO.expiresAt().toString());
-        var totalValue = new ValidateProperty<>(OrderCreateDTO.class, "totalValue", createDTO.totalValue().toString());
-
+        var productsId = new ValidateProperty<>(OrderCreateDTO.class, "productsId", createDTO.productsId().toString());
         results.addAll(
                 Arrays.asList(
                         userId,
@@ -32,7 +31,7 @@ public class VerifyOrderCreate implements VerifyDTO<OrderCreateDTO> {
                         uf,
                         startedAt,
                         expiresAt,
-                        totalValue
+                        productsId
                 )
         );
 
