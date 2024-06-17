@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -28,6 +32,9 @@ public class JWTAuthFilterConfig {
     @Autowired
     private JWTAuthFilter jwtAuthFilter;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private static final String[] AUTH_WHITE_LIST = {
             "/api-docs/**",
             "/swagger-ui/**",
@@ -43,8 +50,7 @@ public class JWTAuthFilterConfig {
                         .permitAll()
                         .requestMatchers(AUTH_WHITE_LIST)
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products", "/orders")
-                        .hasRole(SecutiryRoles.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/products", "/orders").hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

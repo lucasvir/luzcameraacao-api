@@ -8,6 +8,7 @@ import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import br.com.lca.api.domain.repositories.UserRepository;
 import br.com.lca.api.domain.services.ServiceStrategy;
 import br.com.lca.api.domain.services.validations.VerifyDTO;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,7 @@ public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, User
         );
 
         User userEntity = userRepository.save(user);
+
 
         return new UserDTO(userEntity);
     }

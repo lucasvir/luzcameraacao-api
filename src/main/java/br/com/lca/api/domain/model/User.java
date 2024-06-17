@@ -44,7 +44,7 @@ public class User implements Serializable, UserDetails {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Order> orders;
 
-    private List<SecutiryRoles> roles = List.of(SecutiryRoles.USER);
+    private List<SecutiryRoles> roles = new ArrayList<>();
 
     public User() {
     }
@@ -58,6 +58,7 @@ public class User implements Serializable, UserDetails {
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.orders = new ArrayList<>();
+        this.roles.add(SecutiryRoles.USER);
     }
 
     public User(UserCreateDTO createDTO) {

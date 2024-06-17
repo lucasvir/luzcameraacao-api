@@ -6,12 +6,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -55,7 +55,12 @@ public class JWTService {
     }
 
     private String constructToken(HashMap<String, Object> extraClaims, UserDetails userDetails) {
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        List<String> authList = new ArrayList<>(authorities.size());
+        authorities.forEach(a -> authList.add(a.getAuthority()));
+
         return Jwts.builder()
+                .claim("authorities", authList)
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))

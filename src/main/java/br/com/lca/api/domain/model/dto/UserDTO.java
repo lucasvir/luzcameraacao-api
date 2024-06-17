@@ -1,5 +1,6 @@
 package br.com.lca.api.domain.model.dto;
 
+import br.com.lca.api.config.SecutiryRoles;
 import br.com.lca.api.domain.model.Order;
 import br.com.lca.api.domain.model.User;
 
@@ -13,7 +14,8 @@ public record UserDTO(
         String telephone,
         String cpf,
         String cnpj,
-        List<Order> orders
+        List<Order> orders,
+        List<SecutiryRoles> roles
 ) {
     public UserDTO(User user) {
         this(
@@ -24,7 +26,8 @@ public record UserDTO(
                 user.getTelephone(),
                 user.getCpf(),
                 user.getCnpj(),
-                user.getOrders()
+                user.getOrders(),
+                user.getRoles()
         );
     }
 }
