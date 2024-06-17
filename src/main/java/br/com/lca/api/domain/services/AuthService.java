@@ -1,6 +1,6 @@
 package br.com.lca.api.domain.services;
 
-import br.com.lca.api.config.JWTService;
+import br.com.lca.api.config.security.JWTService;
 import br.com.lca.api.domain.model.User;
 import br.com.lca.api.domain.model.dto.AuthLoginResponseDTO;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;

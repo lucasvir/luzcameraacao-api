@@ -1,6 +1,5 @@
 package br.com.lca.api.config.security;
 
-import br.com.lca.api.config.JWTService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

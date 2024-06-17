@@ -1,17 +1,16 @@
 package br.com.lca.api.domain.model;
 
+import br.com.lca.api.config.SecutiryRoles;
 import br.com.lca.api.controllers.exceptions.EmptyDataTransferObject;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_users")
@@ -44,6 +43,8 @@ public class User implements Serializable, UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Order> orders;
+
+    private List<SecutiryRoles> roles = List.of(SecutiryRoles.USER);
 
     public User() {
     }
@@ -104,9 +105,20 @@ public class User implements Serializable, UserDetails {
         return orders;
     }
 
+    public List<SecutiryRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(SecutiryRoles role) {
+        this.roles.add(role);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        this.roles.forEach(r -> authorities.add(new SimpleGrantedAuthority(r.name())));
+
+        return authorities;
     }
 
     @Override
@@ -175,7 +187,7 @@ public class User implements Serializable, UserDetails {
 
         this.firstName = updateDTO.firstName() != null && !updateDTO.firstName().isBlank() ? updateDTO.firstName() : getFirstName();
         this.lastName = updateDTO.lastName() != null && !updateDTO.lastName().isBlank() ? updateDTO.lastName() : getLastName();
-        this.email = updateDTO.email() != null && !updateDTO.email().isBlank()? updateDTO.email() : getEmail();
+        this.email = updateDTO.email() != null && !updateDTO.email().isBlank() ? updateDTO.email() : getEmail();
         this.password = updateDTO.password() != null && !updateDTO.password().isBlank() ? updateDTO.password() : getPassword();
         this.telephone = updateDTO.telephone() != null && !updateDTO.telephone().isBlank() ? updateDTO.telephone() : getTelephone();
         this.cpf = updateDTO.cpf() != null && !updateDTO.cpf().isBlank() ? updateDTO.cpf() : getCpf();

@@ -1,4 +1,4 @@
-package br.com.lca.api.config;
+package br.com.lca.api.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
