@@ -7,6 +7,7 @@ public record OrderUpdateDTO(
         Long userId,
         String location,
         String complement,
+        String city,
         String uf,
         LocalDateTime startedAt,
         LocalDateTime expiresAt,

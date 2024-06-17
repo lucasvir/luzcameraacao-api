@@ -29,6 +29,9 @@ public class Order {
     private String complement;
 
     @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UnidadeFederativa uf;
 
@@ -49,10 +52,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long userId, String location, String complement, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt) {
+    public Order(Long userId, String location, String complement, String city, UnidadeFederativa uf, LocalDateTime startedAt, LocalDateTime expiresAt) {
         this.userId = userId;
         this.location = location;
         this.complement = complement;
+        this.city = city;
         this.uf = uf;
         this.startedAt = startedAt;
         this.expiresAt = expiresAt;
@@ -75,6 +79,10 @@ public class Order {
 
     public String getComplement() {
         return complement;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public UnidadeFederativa getUf() {
@@ -130,6 +138,7 @@ public class Order {
                 ", userId=" + userId +
                 ", location='" + location + '\'' +
                 ", complement=" + complement +
+                ", city=" + city +
                 ", uf=" + uf +
                 ", startedAt=" + startedAt +
                 ", expiresAt=" + expiresAt +
@@ -144,6 +153,7 @@ public class Order {
                 updateDTO.userId() == null
                         && updateDTO.location() == null
                         && updateDTO.complement() == null
+                        && updateDTO.city() == null
                         && updateDTO.uf() == null
                         && updateDTO.startedAt() == null
                         && updateDTO.expiresAt() == null
@@ -154,6 +164,7 @@ public class Order {
         boolean userIdIsPresent = updateDTO.userId() != null && updateDTO.userId() > 0;
         boolean locationIsPresent = updateDTO.location() != null && !updateDTO.location().isBlank();
         boolean complementIsPresent = updateDTO.complement() != null && !updateDTO.complement().isBlank();
+        boolean cityIsPresent = updateDTO.city() != null && !updateDTO.city().isBlank();
         boolean ufIsPresent = updateDTO.uf() != null && !updateDTO.uf().isBlank();
         boolean startedAtIsPresent = updateDTO.startedAt() != null && !updateDTO.startedAt().toString().isBlank();
         boolean expiresAtIsPresent = updateDTO.expiresAt() != null && !updateDTO.expiresAt().toString().isBlank();
@@ -163,6 +174,7 @@ public class Order {
         if (userIdIsPresent) this.userId = updateDTO.userId();
         if (locationIsPresent) this.location = updateDTO.location();
         if (complementIsPresent) this.complement = updateDTO.complement();
+        if (cityIsPresent) this.city = updateDTO.city();
         if (ufIsPresent) this.uf = UnidadeFederativa.fromSigla(updateDTO.uf());
         if (startedAtIsPresent) this.startedAt = updateDTO.startedAt();
         if (expiresAtIsPresent) this.expiresAt = updateDTO.expiresAt();

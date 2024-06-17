@@ -14,7 +14,6 @@ import br.com.lca.api.domain.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -46,6 +45,7 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
                 createDTO.userId(),
                 createDTO.location(),
                 createDTO.complement(),
+                createDTO.city(),
                 UnidadeFederativa.fromSigla(createDTO.uf()),
                 createDTO.startedAt(),
                 createDTO.expiresAt()
@@ -84,10 +84,13 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
         orderRepository.delete(order);
     }
 
-    void appendProducts(Order order, List<Long> productsId) {
+    private void appendProducts(Order order, List<Long> productsId) {
         productsId.forEach(p -> {
             Product product = productRepository.findById(p)
                     .orElseThrow(() -> new NoSuchElementException(p.toString()));
+
+            product.setAvailable(false);
+            productRepository.save(product);
 
             order.setProducts(product);
             order.setTotalValue(order.getTotalValue().add(product.getPrice()));
