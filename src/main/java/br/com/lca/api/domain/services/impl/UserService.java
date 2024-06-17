@@ -9,6 +9,7 @@ import br.com.lca.api.domain.repositories.UserRepository;
 import br.com.lca.api.domain.services.ServiceStrategy;
 import br.com.lca.api.domain.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, User
     @Autowired
     private VerifyDTO<UserCreateDTO> verifyCreateDTO;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDTO findById(Long id) {
         User user = userRepository.findById(id)
@@ -34,11 +38,20 @@ public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, User
     @Override
     public UserDTO create(UserCreateDTO createDTO) {
         boolean emailExists = createDTO.email() != null && userRepository.existsByEmail(createDTO.email());
-        if(emailExists) throw new IllegalArgumentException("Email already registered.");
+        if (emailExists) throw new IllegalArgumentException("Email already registered.");
 
         verifyCreateDTO.verify(createDTO);
 
-        User user = new User(createDTO);
+        User user = new User(
+                createDTO.firstName(),
+                createDTO.lastName(),
+                createDTO.email(),
+                passwordEncoder.encode(createDTO.password()),
+                createDTO.telephone(),
+                null,
+                null
+        );
+
         User userEntity = userRepository.save(user);
 
         return new UserDTO(userEntity);
@@ -47,7 +60,7 @@ public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, User
     @Override
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
-        if(users.isEmpty()) throw new EmptyResourceException();
+        if (users.isEmpty()) throw new EmptyResourceException();
 
         return users.stream().map(UserDTO::new).toList();
     }
@@ -71,4 +84,8 @@ public class UserService implements ServiceStrategy<UserDTO, UserCreateDTO, User
         userRepository.delete(user);
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException(email));
+    }
 }
