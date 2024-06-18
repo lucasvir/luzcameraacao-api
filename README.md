@@ -1,10 +1,10 @@
 # Luz Camera Ação - API
 
-:seedling: API -> (https://luzcameraacao-api.up.railway.app/)
+:seedling: API - https://luzcameraacao-api.up.railway.app/
 
 <br>
 
-:notebook_with_decorative_cover: Doc -> (https://luzcameraacao-api.up.railway.app/swagger-ui.html)
+:notebook_with_decorative_cover: [Doc] (https://luzcameraacao-api.up.railway.app/swagger-ui.html)
 
 # :scroll: Descrição
 
