@@ -1,4 +1,4 @@
-package br.com.lca.api.domain.services.impl;
+package br.com.lca.api.services.impl;
 
 import br.com.lca.api.controllers.exceptions.EmptyResourceException;
 import br.com.lca.api.domain.model.Product;
@@ -8,8 +8,8 @@ import br.com.lca.api.domain.model.dto.ProductUpdateDTO;
 import br.com.lca.api.domain.model.enums.Category;
 import br.com.lca.api.domain.model.enums.Type;
 import br.com.lca.api.domain.repositories.ProductRepository;
-import br.com.lca.api.domain.services.ServiceStrategy;
-import br.com.lca.api.domain.services.validations.VerifyDTO;
+import br.com.lca.api.services.ServiceStrategy;
+import br.com.lca.api.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

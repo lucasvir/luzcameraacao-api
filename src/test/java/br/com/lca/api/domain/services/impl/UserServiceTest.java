@@ -4,6 +4,7 @@ import br.com.lca.api.domain.model.User;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
 import br.com.lca.api.domain.repositories.UserRepository;
+import br.com.lca.api.services.impl.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

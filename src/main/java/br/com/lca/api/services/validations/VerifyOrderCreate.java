@@ -1,4 +1,4 @@
-package br.com.lca.api.domain.services.validations;
+package br.com.lca.api.services.validations;
 
 import br.com.lca.api.domain.model.dto.OrderCreateDTO;
 import org.hibernate.PropertyValueException;

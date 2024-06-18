@@ -1,4 +1,4 @@
-package br.com.lca.api.domain.services;
+package br.com.lca.api.services;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package br.com.lca.api.controllers;
 import br.com.lca.api.domain.model.dto.ProductCreateDTO;
 import br.com.lca.api.domain.model.dto.ProductDTO;
 import br.com.lca.api.domain.model.dto.ProductUpdateDTO;
-import br.com.lca.api.domain.services.impl.ProductService;
+import br.com.lca.api.services.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

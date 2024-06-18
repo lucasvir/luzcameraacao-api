@@ -1,4 +1,4 @@
-package br.com.lca.api.domain.services.impl;
+package br.com.lca.api.services.impl;
 
 import br.com.lca.api.controllers.exceptions.EmptyResourceException;
 import br.com.lca.api.domain.model.User;
@@ -6,9 +6,8 @@ import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
 import br.com.lca.api.domain.model.dto.UserUpdateDTO;
 import br.com.lca.api.domain.repositories.UserRepository;
-import br.com.lca.api.domain.services.ServiceStrategy;
-import br.com.lca.api.domain.services.validations.VerifyDTO;
-import com.google.gson.Gson;
+import br.com.lca.api.services.ServiceStrategy;
+import br.com.lca.api.services.validations.VerifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

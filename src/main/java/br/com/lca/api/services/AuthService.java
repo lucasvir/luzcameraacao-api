@@ -1,4 +1,4 @@
-package br.com.lca.api.domain.services;
+package br.com.lca.api.services;
 
 import br.com.lca.api.config.security.JWTService;
 import br.com.lca.api.domain.model.User;
@@ -6,7 +6,7 @@ import br.com.lca.api.domain.model.dto.AuthLoginResponseDTO;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
 import br.com.lca.api.domain.model.dto.UserLoginDTO;
-import br.com.lca.api.domain.services.impl.UserService;
+import br.com.lca.api.services.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
