@@ -89,6 +89,8 @@ public class OrderService implements ServiceStrategy<OrderDTO, OrderCreateDTO, O
             Product product = productRepository.findById(p)
                     .orElseThrow(() -> new NoSuchElementException(p.toString()));
 
+            if(!product.isAvailable()) throw new IllegalArgumentException("Product not available");
+
             product.setAvailable(false);
             productRepository.save(product);
 
