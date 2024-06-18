@@ -5,6 +5,7 @@
 API REST em Java 17 para uma aplicação web de aluguel de equipamentos para produções audio visuais.
 
 Conta com gerenciamento e ciração de usuarios, produtos e pedidos - autenticação via JWT e persistência em banco relacional na nuvem.
+
 :seedling: API - https://luzcameraacao-api.up.railway.app/
 
 :notebook_with_decorative_cover: Doc -https://luzcameraacao-api.up.railway.app/swagger-ui.html
