@@ -1,6 +1,5 @@
 package br.com.lca.api.config.security;
 
-import br.com.lca.api.config.SecutiryRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -39,7 +35,8 @@ public class JWTAuthFilterConfig {
             "/api-docs/**",
             "/swagger-ui/**",
             "/api-docs/**",
-            "/swagger-resources/**"
+            "/swagger-resources/**",
+            "/api/docs/**"
     };
 
     @Bean
