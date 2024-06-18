@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+security:
+  jwt:
+    secret-key: ${SECURITYJWTKEY}
+    expiration-time: ${SECURITYJWTEXPIRATION}

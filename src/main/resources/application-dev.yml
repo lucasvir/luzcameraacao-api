@@ -28,5 +28,5 @@ springdoc:
     disable-swagger-default-url: true
 security:
   jwt:
-    secret-key: 7f5f1737c18b668d4a9364a7a2537b0d568b0e2c87a61551c8fca8e95afb4f13
-    expiration-time: 3600000
+    secret-key: ${SECURITYJWTKEY}
+    expiration-time: ${SECURITYJWTEXPIRATION}
