@@ -25,8 +25,7 @@ public class SwaggerConfig {
     private Contact createContact() {
         Contact contact = new Contact();
         contact.setName("Lucas do Amaral Virmond");
-        contact.setEmail("lavirmond@gmail.com");
-        contact.setUrl("http://github.com/lucasvir");
+        contact.setUrl("https://github.com/lucasvir/luzcameraacao-api");
 
         return contact;
     }
@@ -44,6 +43,7 @@ public class SwaggerConfig {
                                 .title("Luz Camera Ação")
                                 .description("Gerenciador de locação de equipamentos de audio visual.")
                                 .version("1.0")
+                                .contact(createContact())
                 );
     }
 }

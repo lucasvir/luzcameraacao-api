@@ -32,9 +32,10 @@ public class JWTAuthFilterConfig {
     private PasswordEncoder passwordEncoder;
 
     private static final String[] AUTH_WHITE_LIST = {
-            "/api-docs/**",
+            "/v3/api-docs/**",
             "/swagger-ui/**",
-            "/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-config",
             "/swagger-resources/**",
             "/api/docs/**"
     };

@@ -1,5 +1,8 @@
 # Luz Camera Ação - API
 
+:seedling: [Luz Camera Ação - Api](https://luzcameraacao-api.up.railway.app/)
+:notebook_with_decorative_cover: [Luz Camera Ação - Doc](https://luzcameraacao-api.up.railway.app/swagger-ui.html)
+
 # :scroll: Descrição
 
 API REST em Java 17 para uma aplicação web de aluguel de equipamentos para produções audio visuais.
@@ -20,12 +23,12 @@ Conta com gerenciamento e ciração de usuarios, produtos e pedidos - autentica�
 - Spring Boot
 - JPA / Hibernate
 - Postgres
-- Json Web Token
+- JSON Web Token
 - Swagger
 - Gradle
 - JUnit
 
-## Diagram de Classes
+## Diagrama de Classes
 
 ```mermaid
 classDiagram
