@@ -1,5 +1,30 @@
 # Luz Camera Ação - API
 
+# :scroll: Descrição
+
+API REST em Java 17 para uma aplicação web de aluguel de equipamentos para produções audio visuais.
+
+Conta com gerenciamento e ciração de usuarios, produtos e pedidos - autenticação via JWT e persistência em banco relacional na nuvem.
+
+## :wrench: Funcionalidades
+
+- *Login*
+- *Autenticação JWT Token*
+- *Crud de usuário*
+- *Crud de produtos*
+- *Crud de pedidos*
+
+## :toolbox: Tecnologias
+
+- Java
+- Spring Boot
+- JPA / Hibernate
+- Postgres
+- Json Web Token
+- Swagger
+- Gradle
+- JUnit
+
 ## Diagram de Classes
 
 ```mermaid
@@ -18,7 +43,8 @@ classDiagram
     class Order {
         -int userId
         -String location
-        -int complement
+        -String complement
+        -String city
         -String uf
         -datetime startedAt
         -datetime expiresAt
