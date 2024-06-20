@@ -48,7 +48,7 @@ public class JWTAuthFilterConfig {
                         .permitAll()
                         .requestMatchers(AUTH_WHITE_LIST)
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products", "/orders").hasAuthority("ADMIN")
+                        .requestMatchers("/products", "/orders").hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
