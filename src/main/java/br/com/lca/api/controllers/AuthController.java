@@ -27,7 +27,7 @@ public class AuthController {
     @Operation(
             summary = "Add a new User",
             description = "Add a new User by sending a json with the required fields",
-            tags = {"User"},
+            tags = {"Authentication"},
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -47,7 +47,7 @@ public class AuthController {
     @Operation(
             summary = "Authenticates a User",
             description = "Authenticates a User by sending a json with the required fields",
-            tags = {"User"},
+            tags = {"Authentication"},
             responses = {
                     @ApiResponse(
                             description = "Success",
