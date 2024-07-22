@@ -40,6 +40,12 @@ public class JWTAuthFilterConfig {
             "/api/docs/**"
     };
 
+    private static final String[] AUTH_BLUE_LIST = {
+            "/users/**",
+            "/products/**",
+            "/orders/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -48,9 +54,11 @@ public class JWTAuthFilterConfig {
                         .permitAll()
                         .requestMatchers(AUTH_WHITE_LIST)
                         .permitAll()
-                        .requestMatchers("/products", "/orders").hasAuthority("ADMIN")
-                        .anyRequest()
-                        .authenticated())
+                        .requestMatchers("/products", "/orders")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(AUTH_BLUE_LIST)
+                        .authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -61,7 +69,7 @@ public class JWTAuthFilterConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:8080"));
+        configuration.setAllowedOrigins(List.of("http://localhost:8080", "https://luzcameraacao-api.up.railway.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT"));
         configuration.setAllowedHeaders(List.of(JWTAuthFilter.AUTH_HEADER, "Content-Type"));
 
