@@ -1,15 +1,16 @@
-package br.com.lca.api.domain.services.impl;
+package br.com.lca.api.services.impl;
 
 import br.com.lca.api.domain.model.User;
 import br.com.lca.api.domain.model.dto.UserCreateDTO;
 import br.com.lca.api.domain.model.dto.UserDTO;
 import br.com.lca.api.domain.repositories.UserRepository;
-import br.com.lca.api.services.impl.UserService;
+import br.com.lca.api.services.validations.VerifyDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,6 +26,12 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private VerifyDTO<UserCreateDTO> verifyDTO;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     private final User userMock = new User(
             "First Name",
