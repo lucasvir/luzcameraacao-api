@@ -6,9 +6,9 @@ API REST em Java 17 para uma aplicação web de aluguel de equipamentos para pro
 
 Conta com gerenciamento e ciração de usuarios, produtos e pedidos - autenticação via JWT e persistência em banco relacional na nuvem.
 
-:seedling: API - https://luzcameraacao-api.up.railway.app/
+<s> :seedling: API - https://luzcameraacao-api.up.railway.app/ </s>
 
-:notebook_with_decorative_cover: Doc -https://luzcameraacao-api.up.railway.app/swagger-ui.html
+<s> :notebook_with_decorative_cover: Doc -https://luzcameraacao-api.up.railway.app/swagger-ui.html </s>
 
 ## :wrench: Funcionalidades
 
